@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01 | Algoritmizácia a Python — zadania pre žiakov</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f8fafc; color: #1e293b; font-size: 20px; line-height: 1.7; }
+
+    nav { position: sticky; top: 0; background: #1e1b4b; color: white; display: flex; gap: .25rem; padding: .6rem 2rem; flex-wrap: wrap; z-index: 100; align-items: center; }
+    nav strong { color: white; margin-right: .5rem; }
+    nav a { color: #a5b4fc; text-decoration: none; font-size: .85rem; padding: .3rem .9rem; border-radius: .25rem; }
+    nav a:hover { background: #312e81; color: white; }
+
+    section { max-width: 960px; margin: 0 auto; padding: 3rem 2rem 2.5rem; border-bottom: 1px solid #e2e8f0; }
+    section:last-child { border-bottom: none; }
+
+    h1 { font-size: 2.2rem; color: #1e1b4b; margin-bottom: .5rem; }
+    h2 { font-size: 1.8rem; color: #312e81; margin-bottom: 1.2rem; padding-bottom: .5rem; border-bottom: 2px solid #e0e7ff; }
+    h3 { font-size: 1.25rem; color: #4338ca; margin: 1.75rem 0 .6rem; }
+    p  { margin-bottom: .85rem; }
+    ul, ol { margin: .5rem 0 .85rem 1.5rem; }
+    li { margin-bottom: .5rem; }
+
+    code { background: #e0e7ff; color: #3730a3; padding: .15rem .5rem; border-radius: .3rem; font-size: .88em; font-family: 'Cascadia Code', 'Fira Code', monospace; }
+    pre  { background: #0f172a; color: #7dd3fc; padding: 1.4rem 1.8rem; border-radius: .75rem; font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: .95rem; overflow-x: auto; margin: 1rem 0 1.5rem; line-height: 1.7; }
+    pre .cm { color: #64748b; }
+    pre .at { color: #fbbf24; }
+    pre .st { color: #86efac; }
+    pre .tg { color: #60a5fa; }
+    pre .kw { color: #c084fc; }
+
+    .info  { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 1rem 1.5rem; border-radius: 0 .5rem .5rem 0; margin: 1rem 0; }
+    .tip   { background: #f0fdf4; border-left: 4px solid #22c55e; padding: 1rem 1.5rem; border-radius: 0 .5rem .5rem 0; margin: 1rem 0; }
+    .warn  { background: #fff7ed; border-left: 4px solid #f97316; padding: 1rem 1.5rem; border-radius: 0 .5rem .5rem 0; margin: 1rem 0; }
+    .pozn  { background: #fdf4ff; border-left: 4px solid #a855f7; padding: 1rem 1.5rem; border-radius: 0 .5rem .5rem 0; margin: 1rem 0; }
+
+    .uloha  { border-left: 4px solid #3b82f6; background: #eff6ff; padding: 1rem 1.5rem; border-radius: 0 .5rem .5rem 0; margin-bottom: 1.5rem; }
+    .uloha h2 { margin: 0 0 .5rem; color: #1e40af; font-size: 1.1rem; border: none; padding: 0; }
+    .uloha p, .uloha li { margin: .25rem 0; color: #374151; font-size: .95rem; }
+    .projekt { border-left: 4px solid #22c55e; background: #f0fdf4; }
+    .projekt h2 { color: #15803d; }
+    .bonus   { border-left: 4px solid #a855f7; background: #fdf4ff; }
+    .bonus h2 { color: #7e22ce; }
+    .oddelovac { border: none; border-top: 2px solid #e5e7eb; margin: 2.5rem 0; }
+
+    /* Chybné algoritmy */
+    .chyba-karta {
+      border: 2px solid #fca5a5;
+      background: #fef2f2;
+      border-radius: .75rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .chyba-karta .algo-nazov {
+      font-weight: bold;
+      color: #991b1b;
+      font-size: .9rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: .75rem;
+    }
+    .chyba-karta pre {
+      background: #1c1917;
+      color: #fcd34d;
+      font-size: .88rem;
+      margin: 0 0 .75rem;
+    }
+    .chyba-karta .otazka {
+      font-size: .9rem;
+      color: #7f1d1d;
+      font-style: italic;
+      margin-bottom: .25rem;
+    }
+    .odpoved-riadok {
+      border: 1px dashed #fca5a5;
+      padding: .6rem 1rem;
+      border-radius: .4rem;
+      background: white;
+      min-height: 36px;
+      font-size: .85rem;
+      color: #d1d5db;
+    }
+
+    /* Oddelovač hodín */
+    .hodina-sep {
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      color: white;
+      text-align: center;
+      padding: 2rem 2rem;
+      margin: 0;
+    }
+    .hodina-sep h2 {
+      color: #a5b4fc;
+      border: none;
+      font-size: 1.6rem;
+      margin-bottom: .25rem;
+    }
+    .hodina-sep p { color: #c7d2fe; font-size: .9rem; margin: 0; }
+
+    .badge {
+      display: inline-block;
+      background: #312e81;
+      color: white;
+      font-size: .78rem;
+      font-weight: bold;
+      padding: .25rem .75rem;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Pseudokód bloky — písanie do zošita */
+    .zosit {
+      border: 2px dashed #94a3b8;
+      padding: 1.25rem 1.5rem;
+      border-radius: .5rem;
+      background: #f8fafc;
+      margin: 1rem 0;
+    }
+    .zosit .hint { font-size: .8rem; color: #94a3b8; margin-bottom: .5rem; }
+    .zosit ol { margin-left: 1.5rem; }
+    .zosit ol li { color: #94a3b8; font-size: .9rem; }
+
+    /* Vlastnosti tabuľka */
+    .vlastnosti { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .9rem; }
+    .vlastnosti th { background: #312e81; color: white; padding: .7rem 1rem; text-align: left; }
+    .vlastnosti td { padding: .6rem 1rem; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+    .vlastnosti tr:nth-child(even) td { background: #f1f5f9; }
+    .vlastnosti td:first-child { font-weight: bold; color: #3730a3; white-space: nowrap; }
+    .vlastnosti td code { background: #ddd6fe; color: #3730a3; }
+    .ok  { color: #15803d; font-weight: bold; }
+    .nok { color: #b91c1c; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <strong>PAI · 01</strong>
+  <a href="#hodina1">1. hodina</a>
+  <a href="#chyby">Nájdi chybu</a>
+  <a href="#pisanie">Napíš algoritmus</a>
+  <a href="#hodina2">2. hodina – Python</a>
+  <a href="#projekt">Mini-projekt</a>
+  <a href="#bonus">Bonus</a>
+</nav>
+
+<!-- ÚVOD -->
+<section id="uvod">
+  <div class="badge">PAI · Dvojhodinovka 01 · SPŠ IT Tvrdošín</div>
+  <h1>Algoritmizácia a Python</h1>
+  <p>Dnes sa pozrieme na to, čo musí (a čo nesmie) robiť algoritmus — a napíšeme prvé programy v Pythone.</p>
+  <div class="info">
+    📝 <strong>Kde píšeš?</strong><br>
+    V <strong>1. hodine</strong> zapisuješ do zošita — pseudokód alebo vývojový diagram.<br>
+    V <strong>2. hodine</strong> otvoriš Python editor (IDLE / Thonny / online) a píšeš kód.
+  </div>
+</section>
+
+<!-- === 1. HODINA === -->
+<div class="hodina-sep" id="hodina1">
+  <h2>1. hodina — Algoritmizácia</h2>
+  <p>45 minút · zošit · pseudokód / vývojový diagram</p>
+</div>
+
+<!-- VLASTNOSTI ALGORITMU — rýchly prehľad -->
+<section id="vlastnosti">
+  <h2>Vlastnosti algoritmu</h2>
+  <p>Algoritmus je <strong>presný, konečný postup</strong>, ktorý zo vstupov vytvorí výstup. Každý správny algoritmus musí spĺňať päť vlastností:</p>
+
+  <table class="vlastnosti">
+    <thead>
+      <tr>
+        <th>Vlastnosť</th>
+        <th>Čo znamená</th>
+        <th>Kedy je porušená?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Elementárnosť</td>
+        <td>Každý krok je jednoduchý, vykonateľný príkaz</td>
+        <td>Krok je príliš zložitý / sám o sebe celý algoritmus</td>
+      </tr>
+      <tr>
+        <td>Determinovanosť</td>
+        <td>V každom momente je jasné, čo treba urobiť</td>
+        <td>Pokyn je nejednoznačný — viacero možných výkladov</td>
+      </tr>
+      <tr>
+        <td>Konečnosť</td>
+        <td>Algoritmus sa vždy zastaví (po konečnom počte krokov)</td>
+        <td>Existuje vstup, pre ktorý beží donekonečna</td>
+      </tr>
+      <tr>
+        <td>Rezultatívnosť</td>
+        <td>Pre každý prípustný vstup vždy vznikne výstup</td>
+        <td>Pre niektorý vstup výsledok nevznikne (chyba, delenie nulou...)</td>
+      </tr>
+      <tr>
+        <td>Hromadnosť</td>
+        <td>Funguje pre celú triedu vstupov, nielen pre jeden prípad</td>
+        <td>Algoritmus je "ušitý" len na jeden konkrétny vstup</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ÚLOHA 1 — NÁJDI CHYBU -->
+<section id="chyby">
+  <h2>Úloha 1 — Nájdi chybu</h2>
+  <p>Každý z nasledujúcich algoritmov <strong>porušuje práve jednu vlastnosť</strong>. Pre každý:</p>
+  <ol>
+    <li>urči, <strong>ktorá vlastnosť</strong> je porušená,</li>
+    <li>vysvetli <strong>prečo</strong> — pre aký vstup (alebo prečo vôbec) algoritmus zlyháva.</li>
+  </ol>
+  <div class="info">💡 Každý príklad porušuje inú vlastnosť — každá sa objaví práve raz.</div>
+
+  <hr class="oddelovac">
+
+  <!-- A — Rezultatívnosť -->
+  <div class="chyba-karta">
+    <div class="algo-nazov">Algoritmus A — Vypočítaj priemer zoznamu čísel</div>
+    <pre>Vstup: zoznam čísel Z
+Krok 1: Vypočítaj súčet všetkých čísel v Z  →  s
+Krok 2: Spočítaj, koľko čísel je v Z         →  n
+Krok 3: Vypočítaj priemer: p = s / n
+Krok 4: Vypíš p</pre>
+    <p class="otazka">❓ Pre aký vstup tento algoritmus zlyhá? Čo sa stane a ktorá vlastnosť je porušená?</p>
+    <div class="odpoved-riadok">Sem zapiš odpoveď do zošita ↑</div>
+  </div>
+
+  <!-- B — Konečnosť -->
+  <div class="chyba-karta">
+    <div class="algo-nazov">Algoritmus B — Nájdi celé číslo, ktorého zvyšok po delení 7 je práve 7</div>
+    <pre>Vstup: (žiadny)
+Krok 1: n ← 1
+Krok 2: Ak  n mod 7 = 7,  choď na Krok 4
+Krok 3: n ← n + 1,  choď na Krok 2
+Krok 4: Vypíš n</pre>
+    <p class="otazka">❓ Prečo tento algoritmus nikdy neskončí? Čo si uvedomíš, keď sa zamyslíš nad možnými hodnotami <code>n mod 7</code>?</p>
+    <div class="odpoved-riadok">Sem zapiš odpoveď do zošita ↑</div>
+  </div>
+
+  <!-- C — Determinovanosť -->
+  <div class="chyba-karta">
+    <div class="algo-nazov">Algoritmus C — Zoraď čísla v zozname</div>
+    <pre>Vstup: zoznam čísel Z
+Krok 1: Načítaj Z
+Krok 2: Porovnaj nejaké dvojice čísel a prehoď ich, ak sú v zlom poradí
+Krok 3: Opakuj Krok 2, kým nie je zoznam zoradený
+Krok 4: Vypíš zoradený zoznam</pre>
+    <p class="otazka">❓ Prečo by mal problém počítač (alebo iná osoba) s vykonaním Kroku 2? Ktorá vlastnosť je porušená?</p>
+    <div class="odpoved-riadok">Sem zapiš odpoveď do zošita ↑</div>
+  </div>
+
+  <!-- D — Elementárnosť -->
+  <div class="chyba-karta">
+    <div class="algo-nazov">Algoritmus D — Nájdi všetky prvočísla od 2 do 100</div>
+    <pre>Vstup: (žiadny)
+Krok 1: Pomocou Eratostenovho sita vyfiltruj všetky prvočísla od 2 do 100
+Krok 2: Vypíš výsledok</pre>
+    <p class="otazka">❓ Čo je v tomto algoritme problém? Prečo Krok 1 nie je „správny krok" algoritmu?</p>
+    <div class="odpoved-riadok">Sem zapiš odpoveď do zošita ↑</div>
+  </div>
+
+  <!-- E — Hromadnosť -->
+  <div class="chyba-karta">
+    <div class="algo-nazov">Algoritmus E — Obsah štvorca</div>
+    <pre>Vstup: (žiadny)
+Krok 1: obsah ← 25
+Krok 2: Vypíš obsah</pre>
+    <p class="otazka">❓ Tento algoritmus funguje — ale má zásadný nedostatok. O akú vlastnosť ide a prečo?</p>
+    <div class="odpoved-riadok">Sem zapiš odpoveď do zošita ↑</div>
+  </div>
+</section>
+
+<!-- ÚLOHA 2, 3, 4 — PÍSANIE ALGORITMOV -->
+<section id="pisanie">
+  <h2>Úlohy 2–4 — Napíš algoritmus</h2>
+  <p>Pre každú úlohu napíš postup ako <strong>pseudokód</strong> (číslované kroky) alebo ako <strong>vývojový diagram</strong>. Označ vstup a výstup.</p>
+
+  <div class="uloha">
+    <h2>Úloha 2 — Obsah a obvod obdĺžnika</h2>
+    <p>Napíš algoritmus, ktorý dostane dĺžky strán obdĺžnika <code>a</code> a <code>b</code> a vypočíta jeho <strong>obsah</strong> aj <strong>obvod</strong>.</p>
+    <p>Vzorce: <code>S = a · b</code>, &nbsp; <code>o = 2 · (a + b)</code></p>
+  </div>
+
+  <div class="uloha">
+    <h2>Úloha 3 — Párne alebo nepárne?</h2>
+    <p>Napíš algoritmus, ktorý dostane celé číslo <code>n</code> a oznámi, či je <strong>párne alebo nepárne</strong>.</p>
+    <p class="hint">💡 Nápoveda: zvyšok po delení 2 — ak <code>n mod 2 = 0</code>, číslo je párne.</p>
+  </div>
+
+  <div class="uloha">
+    <h2>Úloha 4 — Maximum z troch čísel</h2>
+    <p>Napíš algoritmus, ktorý dostane tri čísla <code>x</code>, <code>y</code>, <code>z</code> a vypíše <strong>najväčšie</strong> z nich.</p>
+    <p>Zamysli sa: stačia dve porovnania? Alebo potrebuješ viac?</p>
+  </div>
+</section>
+
+<!-- === 2. HODINA === -->
+<div class="hodina-sep" id="hodina2">
+  <h2>2. hodina — Prvé kroky v Pythone</h2>
+  <p>45 minút · Python editor (IDLE / Thonny / online)</p>
+</div>
+
+<section id="python-uvod">
+  <h2>Čo budeš používať</h2>
+  <div class="info">
+    💻 <strong>Otvor Python editor</strong> (IDLE, Thonny alebo <a href="https://replit.com" target="_blank">replit.com</a>).<br>
+    Každý program ulož ako <code>uloha5.py</code>, <code>uloha6.py</code>, ...
+  </div>
+  <p>Tri veci, ktoré dnes potrebuješ vedieť:</p>
+  <ul>
+    <li><code>print()</code> — vypíše hodnotu na obrazovku</li>
+    <li><code>input()</code> — načíta text od používateľa (vráti reťazec!)</li>
+    <li><code>int()</code> a <code>float()</code> — skonvertujú text na číslo</li>
+  </ul>
+</section>
+
+<section id="ulohy-python">
+  <h2>Úlohy 5–7 — Python programy</h2>
+
+  <div class="uloha">
+    <h2>Úloha 5 — Pozdrav</h2>
+    <p>Napíš program, ktorý sa opýta na meno a potom vypíše pozdrav. Výstup má vyzerať takto:</p>
+    <pre>Ako sa voláš? <span class="st">Jana</span>
+Ahoj, <span class="st">Jana</span>! Vitaj na hodine PAI.</pre>
+    <p>Zatiaľ <strong>neprevádzaj</strong> vstup na číslo — meno je text.</p>
+  </div>
+
+  <div class="uloha">
+    <h2>Úloha 6 — Súčet dvoch čísel</h2>
+    <p>Napíš program, ktorý načíta dve <strong>celé čísla</strong> a vypíše ich súčet. Daj pozor na konverziu!</p>
+    <pre>Zadaj prvé číslo: <span class="st">12</span>
+Zadaj druhé číslo: <span class="st">8</span>
+Súčet je: 20</pre>
+    <div class="warn">
+      ⚠️ <code>input()</code> vždy vráti <strong>reťazec</strong> (text), nie číslo.<br>
+      Bez konverzie <code>int()</code> by <code>"12" + "8"</code> dalo <code>"128"</code>, nie <code>20</code>.
+    </div>
+  </div>
+
+  <div class="uloha">
+    <h2>Úloha 7 — Obdĺžnik v Pythone</h2>
+    <p>Vráť sa k Úlohe 2 zo zošita. Teraz <strong>preveď svoj pseudokód do Pythonu</strong>. Program načíta strany <code>a</code>, <code>b</code> (desatinné čísla) a vypíše obsah aj obvod.</p>
+    <pre>Strana a: <span class="st">4.5</span>
+Strana b: <span class="st">3</span>
+Obsah: 13.5
+Obvod: 15.0</pre>
+    <p>Použij <code>float()</code> namiesto <code>int()</code> — strany nemusia byť celé čísla.</p>
+  </div>
+</section>
+
+<!-- MINI-PROJEKT -->
+<section id="projekt">
+  <div class="uloha projekt">
+    <h2>🎯 Mini-projekt — Kalkulačka vlastností čísla</h2>
+    <p>Vytvor program, ktorý od používateľa načíta <strong>jedno celé číslo</strong> a vypíše o ňom tieto informácie:</p>
+    <ul>
+      <li>✅ Je číslo <strong>kladné, záporné alebo nula</strong>?</li>
+      <li>✅ Je číslo <strong>párne alebo nepárne</strong>?</li>
+      <li>✅ Aký je jeho <strong>absolútna hodnota</strong>? (nápoveda: <code>abs()</code>)</li>
+      <li>✅ Aký je jeho <strong>štvorec</strong>? (nápoveda: <code>n ** 2</code>)</li>
+    </ul>
+    <p><strong>Postup:</strong> Najprv si nakresli do zošita, čo program robí (vstup → spracovanie → výstup). Až potom kóduj.</p>
+    <p><strong>Vzorový výstup</strong> pre vstup <code>-6</code>:</p>
+    <pre>Zadaj celé číslo: <span class="st">-6</span>
+Číslo -6 je záporné.
+Číslo -6 je párne.
+Absolútna hodnota: 6
+Štvorec: 36</pre>
+  </div>
+</section>
+
+<!-- BONUS -->
+<section id="bonus">
+  <div class="uloha bonus">
+    <h2>⭐ Bonus — Ak si stihol(a) mini-projekt</h2>
+    <ol>
+      <li>
+        <strong>Domáca úloha (pseudokód):</strong> Napíš algoritmus na výpočet obvodu kruhu. Vstup: polomer <code>r</code>. Použi <code>π ≈ 3.14</code>.
+      </li>
+      <li>
+        <strong>Domáca úloha (Python):</strong> Preveď predchádzajúci pseudokód do Pythonu. Program načíta polomer a vypíše obvod.
+        <pre>Polomer: <span class="st">5</span>
+Obvod kruhu: 31.400000000000002</pre>
+      </li>
+      <li>
+        <strong>Výzva navyše — opravený výpis:</strong> Výsledok je škaredý (<code>31.400000000000002</code>). Zisti, ako vypísať iba 2 desatinné miesta — skús <code>round()</code> alebo f-string: <code>f"{obvod:.2f}"</code>.
+      </li>
+      <li>
+        <strong>Zamysli sa:</strong> Vráť sa k Algoritmu B z Úlohy 1 (nekonečný cyklus). Vieš ho <em>opraviť</em> tak, aby skončil? Aká by musela byť podmienka, aby mala riešenie?
+      </li>
+    </ol>
+  </div>
+</section>
+
+</body>
+</html>
