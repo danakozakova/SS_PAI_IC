@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02 | Prvé kroky v Pythone — zadania pre žiakov</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f8fafc; color: #1e293b; font-size: 20px; line-height: 1.7; }
+
+    nav { position: sticky; top: 0; background: #1e1b4b; color: white; display: flex; gap: .25rem; padding: .6rem 2rem; flex-wrap: wrap; z-index: 100; align-items: center; }
+    nav strong { color: white; margin-right: .5rem; }
+    nav a { color: #a5b4fc; text-decoration: none; font-size: .85rem; padding: .3rem .9rem; border-radius: .25rem; }
+    nav a:hover { background: #312e81; color: white; }
+
+    section { max-width: 960px; margin: 0 auto; padding: 3rem 2rem 2.5rem; border-bottom: 1px solid #e2e8f0; }
+    section:last-child { border-bottom: none; }
+
+    h1 { font-size: 2.2rem; color: #1e1b4b; margin-bottom: .5rem; }
+    h2 { font-size: 1.8rem; color: #312e81; margin-bottom: 1.2rem; padding-bottom: .5rem; border-bottom: 2px solid #e0e7ff; }
+    h3 { font-size: 1.25rem; color: #4338ca; margin: 1.75rem 0 .6rem; }
+    p  { margin-bottom: .85rem; }
+    ul, ol { margin: .5rem 0 .85rem 1.5rem; }
+    li { margin-bottom: .5rem; }
+
+    code { background: #e0e7ff; color: #3730a3; padding: .15rem .5rem; border-radius: .3rem; font-size: .88em; font-family: 'Cascadia Code', 'Fira Code', monospace; }
+    pre  { background: #0f172a; color: #7dd3fc; padding: 1.4rem 1.8rem; border-radius: .75rem; font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: .95rem; overflow-x: auto; margin: 1rem 0 1.5rem; line-height: 1.7; }
+    pre .cm { color: #64748b; }
+    pre .st { color: #86efac; }
+    pre .kw { color: #c084fc; }
+
+    .info  { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 1rem 1.5rem; border-radius: 0 .5rem .5rem 0; margin: 1rem 0; }
+    .tip   { background: #f0fdf4; border-left: 4px solid #22c55e; padding: 1rem 1.5rem; border-radius: 0 .5rem .5rem 0; margin: 1rem 0; }
+    .warn  { background: #fff7ed; border-left: 4px solid #f97316; padding: 1rem 1.5rem; border-radius: 0 .5rem .5rem 0; margin: 1rem 0; }
+
+    .uloha  { border-left: 4px solid #3b82f6; background: #eff6ff; padding: 1rem 1.5rem; border-radius: 0 .5rem .5rem 0; margin-bottom: 1.5rem; }
+    .uloha h2 { margin: 0 0 .5rem; color: #1e40af; font-size: 1.1rem; border: none; padding: 0; }
+    .uloha p, .uloha li { margin: .25rem 0; color: #374151; font-size: .95rem; }
+    .projekt { border-left: 4px solid #22c55e; background: #f0fdf4; }
+    .projekt h2 { color: #15803d; }
+    .bonus   { border-left: 4px solid #a855f7; background: #fdf4ff; }
+    .bonus h2 { color: #7e22ce; }
+    .oddelovac { border: none; border-top: 2px solid #e5e7eb; margin: 2.5rem 0; }
+
+    .badge { display: inline-block; background: #312e81; color: white; font-size: .78rem; font-weight: bold; padding: .25rem .75rem; border-radius: 1rem; margin-bottom: 1rem; }
+
+    /* Porovnanie pseudokód vs Python */
+    .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1.25rem 0; }
+    .vs-box { border-radius: .75rem; overflow: hidden; }
+    .vs-box .vs-label { font-size: .78rem; font-weight: bold; text-transform: uppercase; letter-spacing: .05em; padding: .5rem 1.25rem; }
+    .vs-box.pseudo .vs-label { background: #1e3a5f; color: #7dd3fc; }
+    .vs-box.python .vs-label { background: #14532d; color: #4ade80; }
+    .vs-box pre { margin: 0; border-radius: 0 0 .75rem .75rem; font-size: .88rem; }
+
+    /* Debugger sekcia */
+    .debug-kroky { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+    .debug-krok { background: #f8fafc; border: 2px solid #c7d2fe; border-radius: .75rem; padding: 1rem 1.2rem; }
+    .debug-krok .klaves { display: inline-block; background: #1e1b4b; color: #a5b4fc; font-family: 'Cascadia Code','Fira Code',monospace; font-size: .85rem; font-weight: bold; padding: .2rem .65rem; border-radius: .3rem; margin-bottom: .4rem; }
+    .debug-krok p { margin: .3rem 0 0; font-size: .9rem; color: #374151; }
+    .debug-krok strong { color: #1e1b4b; }
+    .bp-dot { display: inline-block; width: 12px; height: 12px; background: #ef4444; border-radius: 50%; margin-right: .35rem; vertical-align: middle; }
+    .debug-tbl { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: .95rem; }
+    .debug-tbl th { background: #1e1b4b; color: #a5b4fc; padding: .7rem 1rem; text-align: left; }
+    .debug-tbl td { padding: .65rem 1rem; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+    .debug-tbl tr:nth-child(even) td { background: #f0f4ff; }
+    .debug-tbl td:first-child { font-family: 'Cascadia Code','Fira Code',monospace; font-weight: bold; color: #3730a3; white-space: nowrap; }
+    .debug-uloha { background: #fefce8; border: 2px solid #fbbf24; border-radius: .75rem; padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
+    .debug-uloha h3 { color: #92400e; margin-top: 0; }
+    .debug-uloha p, .debug-uloha li { color: #451a03; font-size: .95rem; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <strong>PAI · 02</strong>
+  <a href="#recap">Opakovanie</a>
+  <a href="#most">Pseudokód → Python</a>
+  <a href="#zaklady">Základy</a>
+  <a href="#ulohy">Úlohy</a>
+  <a href="#debug">Debugger</a>
+  <a href="#projekt">Mini-projekt</a>
+  <a href="#bonus">Bonus</a>
+</nav>
+
+<!-- ÚVOD -->
+<section id="uvod">
+  <div class="badge">PAI · Dvojhodinovka 02 · SPŠ IT Tvrdošín</div>
+  <h1>Prvé kroky v Pythone</h1>
+  <p>Minule sme sa naučili písať algoritmy. Dnes ich prevedieme do skutočného programovacieho jazyka — Pythonu.</p>
+  <div class="info">
+    💻 <strong>Otvor VS Code</strong>, vytvor nový súbor s príponou <code>.py</code> a spusti ho cez <strong>▶ Run</strong> alebo <strong>F5</strong>.<br>
+    Každý program ulož ako <code>uloha1.py</code>, <code>uloha2.py</code>, ...
+  </div>
+</section>
+
+<!-- RECAP + MOST -->
+<section id="recap">
+  <h2>Spomínaš si na minulú hodinu?</h2>
+  <p>Na tabuli sme spoločne vyriešili algoritmus na nájdenie maxima z troch čísel. Zapísali sme ho ako pseudokód — kroky zrozumiteľné pre človeka.</p>
+  <p>Dnes uvidíš, že pseudokód a Python si sú <strong>veľmi podobné</strong>. Stačí naučiť sa, ako Python „číta" tie isté kroky.</p>
+</section>
+
+<section id="most">
+  <h2>Od pseudokódu k Pythonu</h2>
+  <p>Tu je algoritmus maxima z troch čísel — presne tak, ako sme ho mali na tabuli — a vedľa neho Python kód, ktorý robí to isté:</p>
+
+  <div class="vs">
+    <div class="vs-box pseudo">
+      <div class="vs-label">Pseudokód (z tabule)</div>
+      <pre>1. načítaj(x)
+2. načítaj(y)
+3. načítaj(z)
+4. ak x ≥ y, tak max←x
+5. ak x < y, tak max←y
+6. ak max < z, tak max←z
+7. vypis(max)</pre>
+    </div>
+    <div class="vs-box python">
+      <div class="vs-label">Python</div>
+      <pre>x = int(input("x: "))
+y = int(input("y: "))
+z = int(input("z: "))
+<span class="kw">if</span> x >= y:
+    max = x
+<span class="kw">else</span>:
+    max = y
+<span class="kw">if</span> max < z:
+    max = z
+<span class="kw">print</span>(max)</pre>
+    </div>
+  </div>
+
+  <div class="tip">
+    💡 Všimni si: každý krok pseudokódu sa stáva jedným (alebo dvoma) riadkami Pythonu. Logika je <strong>úplne rovnaká</strong> — mení sa iba zápis.
+  </div>
+
+  <p>Skopíruj Python kód do editora, spusti ho a vyskúšaj vstup <strong>x=67, y=69, z=1000</strong> — dostaneš rovnaký výsledok ako na tabuli.</p>
+</section>
+
+<!-- ZÁKLADY -->
+<section id="zaklady">
+  <h2>Tri veci, ktoré dnes potrebuješ</h2>
+
+  <h3>1. Výstup — <code>print()</code></h3>
+  <pre><span class="kw">print</span>(<span class="st">"Ahoj, svet!"</span>)      <span class="cm"># vypíše text</span>
+<span class="kw">print</span>(42)               <span class="cm"># vypíše číslo</span>
+<span class="kw">print</span>(<span class="st">"Výsledok:"</span>, 42)  <span class="cm"># vypíše text a číslo</span></pre>
+
+  <h3>2. Vstup — <code>input()</code></h3>
+  <pre>meno = <span class="kw">input</span>(<span class="st">"Ako sa voláš? "</span>)
+<span class="kw">print</span>(<span class="st">"Ahoj,"</span>, meno)</pre>
+
+  <h3>3. Konverzia na číslo — <code>int()</code> a <code>float()</code></h3>
+  <pre><span class="cm"># input() VŽDY vráti text (reťazec)</span>
+<span class="cm"># Bez konverzie by "12" + "8" = "128"  (lepenie textu!)</span>
+a = <span class="kw">int</span>(<span class="kw">input</span>(<span class="st">"Zadaj číslo: "</span>))    <span class="cm"># celé číslo</span>
+b = <span class="kw">float</span>(<span class="kw">input</span>(<span class="st">"Zadaj číslo: "</span>))  <span class="cm"># desatinné číslo</span></pre>
+
+  <div class="warn">
+    ⚠️ <strong>Najčastejšia chyba:</strong> zabudnutie <code>int()</code> alebo <code>float()</code> pri vstupe.<br>
+    Skús sám: napíš program bez konverzie, zadaj dve čísla a pozoruj, čo sa stane.
+  </div>
+</section>
+
+<!-- ÚLOHY -->
+<section id="ulohy">
+  <h2>Úlohy 1–4</h2>
+
+  <div class="uloha">
+    <h2>Úloha 1 — Pozdrav</h2>
+    <p>Napíš program, ktorý sa opýta na meno a vypíše pozdrav.</p>
+    <p>Očakávaný výstup:</p>
+    <pre>Ako sa voláš? <span class="st">Jana</span>
+Ahoj, Jana! Vitaj na hodine PAI.</pre>
+    <p>Meno je text — nekonvertuj na číslo.</p>
+  </div>
+
+  <div class="uloha">
+    <h2>Úloha 2 — Súčet dvoch čísel</h2>
+    <p>Napíš program, ktorý načíta dve <strong>celé čísla</strong> a vypíše ich súčet.</p>
+    <pre>Zadaj prvé číslo: <span class="st">12</span>
+Zadaj druhé číslo: <span class="st">8</span>
+Súčet je: 20</pre>
+    <p>Nezabudni na <code>int()</code>!</p>
+  </div>
+
+  <div class="uloha">
+    <h2>Úloha 3 — Obsah a obvod obdĺžnika</h2>
+    <p>Napíš program, ktorý načíta strany <code>a</code> a <code>b</code> (môžu byť desatinné) a vypíše obsah aj obvod.</p>
+    <pre>Strana a: <span class="st">4.5</span>
+Strana b: <span class="st">3</span>
+Obsah: 13.5
+Obvod: 15.0</pre>
+    <p>Použi <code>float()</code> — strany nemusia byť celé čísla.</p>
+  </div>
+
+  <div class="uloha">
+    <h2>Úloha 4 — Maximum z tabule v Pythone</h2>
+    <p>Vráť sa k algoritmu z úvodu tejto hodiny (porovnanie z tabule). Napíš ho ako program, ktorý načíta tri čísla a vypíše najväčšie.</p>
+    <pre>Zadaj x: <span class="st">67</span>
+Zadaj y: <span class="st">69</span>
+Zadaj z: <span class="st">1000</span>
+Maximum je: 1000</pre>
+    <p>Vzor kódu máš v sekcii „Od pseudokódu k Pythonu" vyššie — skús ho najprv napísať sám bez pozerania.</p>
+  </div>
+</section>
+
+<!-- DEBUGGER -->
+<section id="debug">
+  <h2>Debugger — krokovanie v&nbsp;VS&nbsp;Code</h2>
+  <p>Keď program nefunguje tak, ako by mal, pomôže ti <strong>debugger</strong> — nástroj, ktorý ti dovolí sledovať program krok za krokom a vidieť hodnoty premenných v každom okamihu.</p>
+
+  <div class="info">
+    🔍 <strong>Čo je breakpoint (bod prerušenia)?</strong><br>
+    Klikni na ľavý okraj editora (vedľa čísla riadku) — objaví sa <span class="bp-dot"></span><strong>červená bodka</strong>. Program sa na tomto mieste zastaví a čaká na teba.
+  </div>
+
+  <h3>Ako spustiť debugger vo VS Code</h3>
+  <div class="debug-kroky">
+    <div class="debug-krok">
+      <div class="klaves">klik na okraj</div>
+      <p><strong>Nastav breakpoint</strong><br>Červená bodka <span class="bp-dot"></span> na riadku, kde chceš zastaviť.</p>
+    </div>
+    <div class="debug-krok">
+      <div class="klaves">F5</div>
+      <p><strong>Spusti s debuggerom</strong><br>Program beží, až kým nenarazí na breakpoint.</p>
+    </div>
+    <div class="debug-krok">
+      <div class="klaves">F10</div>
+      <p><strong>Step Over — krok</strong><br>Vykoná jeden riadok a zastaví sa na nasledujúcom.</p>
+    </div>
+    <div class="debug-krok">
+      <div class="klaves">F11</div>
+      <p><strong>Step Into — vstúp</strong><br>Vstúpi do volania funkcie (napr. do tela <code>input()</code>).</p>
+    </div>
+    <div class="debug-krok">
+      <div class="klaves">Shift+F5</div>
+      <p><strong>Zastav</strong><br>Ukončí debugger a beh programu.</p>
+    </div>
+  </div>
+
+  <h3>Panel Premenné (Variables)</h3>
+  <p>Keď je program zastavený na breakpointe, v ľavom paneli VS Code uvidíš sekciu <strong>VARIABLES</strong>. Tam nájdeš meno a aktuálnu hodnotu každej premennej — presne tak, ako si v Turbo Pascale videla stav premenných počas krokovania.</p>
+
+  <table class="debug-tbl">
+    <tr>
+      <th>Klávesová skratka</th>
+      <th>Čo robí</th>
+    </tr>
+    <tr><td>F5</td><td>Spusti / Pokračuj (Continue) — beh do ďalšieho breakpointu</td></tr>
+    <tr><td>F10</td><td>Krok (Step Over) — vykoná aktuálny riadok, zastaví na nasledujúcom</td></tr>
+    <tr><td>F11</td><td>Vstúp (Step Into) — prejde dnu do funkcie na aktuálnom riadku</td></tr>
+    <tr><td>Shift+F11</td><td>Vystúp (Step Out) — dokončí funkciu a vráti sa o úroveň vyššie</td></tr>
+    <tr><td>Shift+F5</td><td>Zastav debugger</td></tr>
+    <tr><td>klik na okraj</td><td>Zapni / vypni breakpoint na tomto riadku</td></tr>
+  </table>
+
+  <div class="debug-uloha">
+    <h3>🔬 Praktická úloha — krokuj algoritmus maxima</h3>
+    <ol>
+      <li>Otvor vo VS Code súbor <code>uloha4.py</code> (maximum z troch čísel).</li>
+      <li>Nastav breakpoint <span class="bp-dot"></span> na prvý riadok (<code>x = int(input(...))</code>).</li>
+      <li>Stlač <strong>F5</strong> a zadaj hodnoty <code>x=67</code>, <code>y=69</code>, <code>z=1000</code>.</li>
+      <li>Striedaj <strong>F10</strong> (krok za krokom) a sleduj panel <strong>VARIABLES</strong>:
+        <ul>
+          <li>Po treťom <code>input()</code>: aké sú hodnoty <code>x</code>, <code>y</code>, <code>z</code>?</li>
+          <li>Po prvom <code>if x &gt;= y</code>: vstúpil program do <code>if</code> alebo <code>else</code>? Prečo?</li>
+          <li>Po druhom <code>if max &lt; z</code>: zmenila sa hodnota <code>max</code>? Na čo?</li>
+          <li>Na konci: čo vypíše <code>print(max)</code>?</li>
+        </ul>
+      </li>
+      <li>Zopakuj s hodnotami <code>x=10</code>, <code>y=5</code>, <code>z=3</code> — porovnaj, kadiaľ program išiel tentokrát.</li>
+    </ol>
+    <div class="tip" style="margin-top:1rem">
+      💡 <strong>Tip:</strong> Debugger neklamie — ak si myslíš, že premenná má inú hodnotu, ako ti ukazuje panel, chyba je v tebe, nie v programe. Prečítaj kód znova.
+    </div>
+  </div>
+</section>
+
+<!-- MINI-PROJEKT -->
+<section id="projekt">
+  <div class="uloha projekt">
+    <h2>🎯 Mini-projekt — Kalkulačka vlastností čísla</h2>
+    <p>Program načíta jedno <strong>celé číslo</strong> a vypíše o ňom tieto informácie:</p>
+    <ul>
+      <li>✅ Je číslo <strong>kladné, záporné alebo nula</strong>?</li>
+      <li>✅ Je číslo <strong>párne alebo nepárne</strong>? &nbsp; (nápoveda: <code>n % 2</code>)</li>
+      <li>✅ Aká je jeho <strong>absolútna hodnota</strong>? &nbsp; (nápoveda: <code>abs(n)</code>)</li>
+      <li>✅ Aký je jeho <strong>štvorec</strong>? &nbsp; (nápoveda: <code>n ** 2</code>)</li>
+    </ul>
+    <p><strong>Vzorový výstup</strong> pre vstup <code>-6</code>:</p>
+    <pre>Zadaj celé číslo: <span class="st">-6</span>
+Číslo -6 je záporné.
+Číslo -6 je párne.
+Absolútna hodnota: 6
+Štvorec: 36</pre>
+    <p><strong>Postup:</strong> Najprv si nakresli do zošita, čo program robí (vstup → spracovanie → výstup). Až potom kóduj.</p>
+  </div>
+</section>
+
+<!-- BONUS -->
+<section id="bonus">
+  <div class="uloha bonus">
+    <h2>⭐ Bonus</h2>
+    <ol>
+      <li>
+        <strong>Obvod kruhu:</strong> Napíš program, ktorý načíta polomer <code>r</code> a vypíše obvod. Použi <code>pi = 3.14</code>.
+        <pre>Polomer: <span class="st">5</span>
+Obvod kruhu: 31.4</pre>
+      </li>
+      <li>
+        <strong>Pekný výpis:</strong> Výsledok <code>31.400000000000002</code> vyzerá škaredé. Skús: <code>f"{obvod:.2f}"</code> — čo urobí <code>:.2f</code>?
+      </li>
+      <li>
+        <strong>Zamysli sa:</strong> Vráť sa k algoritmu maxima. Čo by sa stalo, keby si Krok 4 zmenil z <code>ak x ≥ y</code> na <code>ak x > y</code>? Fungovalo by to stále správne? Pre aké vstupy by bol rozdiel?
+      </li>
+    </ol>
+  </div>
+</section>
+
+</body>
+</html>
