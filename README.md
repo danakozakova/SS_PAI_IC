@@ -7,9 +7,4 @@
 
 # 03 Téma - Algoritmické myslenie
 - https://www.viemeinformatiku.sk/informatika-stredna-skola-1
-
 - časť **Algoritmické myslenie: Postupnosti príkazov**
-- 
-- https://www.viemeinformatiku.sk/pexeso-postupnost-akcii-korytnacka-2/154?source=explicitKC&topic=cvicenia-algoritmicke-myslenie-zaklady
-- https://www.viemeinformatiku.sk/pexeso-postupnost-akcii-korytnacka-2/148
-- 
