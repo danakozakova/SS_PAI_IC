@@ -7,4 +7,4 @@
 
 # 03 Téma - Algoritmické myslenie
 - https://www.viemeinformatiku.sk/informatika-stredna-skola-1
-- časť **Algoritmické myslenie: Postupnosti príkazov**
+- časť **Algoritmické myslenie: Postupnosti príkazov**: https://www.viemeinformatiku.sk/cvicenia-algoritmicke-myslenie-zaklady
