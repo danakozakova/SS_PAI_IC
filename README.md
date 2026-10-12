@@ -12,11 +12,11 @@
 # 04 Téma - úvod do programovania:
 - [04_01_uvod_jupyter_zadanie.ipynb](https://github.com/danakozakova/SS_PAI_IC/blob/main/04_01_uvod_jupyter_zadanie.ipynb)
 - [04_02_premenne_a_typy_zadanie.ipynb](https://github.com/danakozakova/SS_PAI_IC/blob/main/04_02_premenne_a_typy_zadanie.ipynb)
-- [04_03_operacie_s_cislami_zadanie.ipynb](https://github.com/danakozakova/SS_PAI_IC/blob/main/04_03_operacie_s_cislami_zadanie.ipynb)
+- [04_03_operacie_s_cislami_zadanie.ipynb](04_03_operacie_s_cislami_zadanie.ipynb)
 - [TEST](https://forms.cloud.microsoft/e/WZHY93wGrS)
 
 # 05 Téma - stringy, zoznamy:
-- [05_stringy_zoznamy_zadanie](05_stringy_zoznamy_zadanie.html)
+- [05_stringy_zoznamy_zadanie](05_stringy_zoznamy_zadanie.ipynb)
 ------------------
 
 .venv\Scripts\python -m pip install ipykernel
