@@ -17,6 +17,7 @@
 
 # 05 Téma - stringy, zoznamy:
 - [05_stringy_zoznamy_zadanie](05_stringy_zoznamy_zadanie.ipynb)
+- [05_01_cvicenia_zadanie.ipynb](05_01_cvicenia_zadanie.ipynb)
 ------------------
 
 .venv\Scripts\python -m pip install ipykernel
