@@ -20,4 +20,7 @@
 - [05_01_cvicenia_zadanie.ipynb](05_01_cvicenia_zadanie.ipynb)
 ------------------
 
-.venv\Scripts\python -m pip install ipykernel
+
+
+**GITHUB:**
+https://forms.cloud.microsoft/e/TiCGM93Je2
