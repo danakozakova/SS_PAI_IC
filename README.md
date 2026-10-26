@@ -22,7 +22,7 @@
 
 # 06 Téma - funkcie:
 - [06_funkcie.ipynb](06_funkcie.ipynb)
-- 06_funkcie.ipynb
+- [06_funkcie_cvicenia.ipynb](06_funkcie_cvicenia.ipynb)
 
 **GITHUB:**
 https://forms.cloud.microsoft/e/TiCGM93Je2
