@@ -20,7 +20,9 @@
 - [05_01_cvicenia_zadanie.ipynb](05_01_cvicenia_zadanie.ipynb)
 ------------------
 
-
+# 06 Téma - funkcie:
+- [06_funkcie.ipynb](06_funkcie.ipynb)
+- 06_funkcie.ipynb
 
 **GITHUB:**
 https://forms.cloud.microsoft/e/TiCGM93Je2
