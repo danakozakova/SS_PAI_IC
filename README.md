@@ -24,5 +24,9 @@
 - [06_funkcie.ipynb](06_funkcie.ipynb)
 - [06_funkcie_cvicenia.ipynb](06_funkcie_cvicenia.ipynb)
 
+# 07 Téma - slovníky:
+- [test](https://forms.cloud.microsoft/e/VwKP55K40X)
+
+  
 **GITHUB:**
 https://forms.cloud.microsoft/e/TiCGM93Je2
