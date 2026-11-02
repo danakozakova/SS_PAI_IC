@@ -23,7 +23,8 @@
 # 06 Téma - funkcie:
 - [06_funkcie.ipynb](06_funkcie.ipynb)
 - [06_funkcie_cvicenia.ipynb](06_funkcie_cvicenia.ipynb)
-------------------
+- [06-test](https://forms.cloud.microsoft/e/uwzAFP0Qxs)
+
 
 # 07 Téma - slovníky:
 - [test](https://forms.cloud.microsoft/e/VwKP55K40X)
