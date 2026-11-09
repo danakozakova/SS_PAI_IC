@@ -27,8 +27,13 @@
 
 
 # 07 Téma - slovníky:
+- [07_slovniky.ipynb](07_slovniky.ipynb)
+- [07_slovniky_cvicenia.ipynb](07_slovniky_cvicenia.ipynb)
 - [test](https://forms.cloud.microsoft/e/VwKP55K40X)
 
+# 08 Téma - objekty:
+- [08_objekty.ipynb](08_objekty.ipynb)
+- [test](https://forms.cloud.microsoft/e/sc854MUkwm)
 ------------------
-Odkaz na **GITHUB:**
+Formulár pre odkaz na **GITHUB:**
 https://forms.cloud.microsoft/e/TiCGM93Je2
