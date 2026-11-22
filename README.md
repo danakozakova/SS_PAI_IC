@@ -34,6 +34,10 @@
 # 08 Téma - objekty:
 - [08_objekty.ipynb](08_objekty.ipynb)
 - [test](https://forms.cloud.microsoft/e/sc854MUkwm)
+
+# 10 Téma - opakovanie:
+- [test](https://forms.cloud.microsoft/e/u6TAid73j1)
+- 
 ------------------
 Formulár pre odkaz na **GITHUB:**
 https://forms.cloud.microsoft/e/TiCGM93Je2
