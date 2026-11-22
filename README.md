@@ -36,7 +36,8 @@
 - [test](https://forms.cloud.microsoft/e/sc854MUkwm)
 
 # 10 Téma - opakovanie:
-- [test](https://forms.cloud.microsoft/e/u6TAid73j1)
+- [testA](https://forms.cloud.microsoft/e/u6TAid73j1)
+- [testB](https://forms.cloud.microsoft/e/R4ikiUMnkM)
 - 
 ------------------
 Formulár pre odkaz na **GITHUB:**
