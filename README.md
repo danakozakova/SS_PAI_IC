@@ -40,6 +40,7 @@
 - [testB](https://forms.cloud.microsoft/e/R4ikiUMnkM)
 - [praktické zadanie A](10_prakticke_ulohy_A_zadanie.ipynb)
 - [praktické zadanie B](10_prakticke_ulohy_B_zadanie.ipynb)
+- [odovzdať zadanie](https://forms.cloud.microsoft/e/TiCGM93Je2)
 ------------------
 Formulár pre odkaz na **GITHUB:**
 https://forms.cloud.microsoft/e/TiCGM93Je2
