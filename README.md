@@ -38,7 +38,8 @@
 # 10 Téma - opakovanie:
 - [testA](https://forms.cloud.microsoft/e/u6TAid73j1)
 - [testB](https://forms.cloud.microsoft/e/R4ikiUMnkM)
-- 
+- [praktické zadanie A](10_prakticke_ulohy_A_zadanie.ipynb)
+- [praktické zadanie B](10_prakticke_ulohy_B_zadanie.ipynb)
 ------------------
 Formulár pre odkaz na **GITHUB:**
 https://forms.cloud.microsoft/e/TiCGM93Je2
