@@ -1,0 +1,12 @@
+01_algoritmizacia_studenti_zadanie.html
+03_premenne_a_typy_zadanie.ipynb
+04_01_uvod_jupyter_zadanie.ipynb
+04_02_premenne_a_typy_zadanie.ipynb
+04_03_operacie_s_cislami_zadanie.ipynb
+04_navod_prostredie_doma_zadanie.md
+05_01_cvicenia_zadanie.ipynb
+05_stringy_zoznamy_zadanie.ipynb
+10_domace_opakovanie_studenti.md
+10_prakticke_ulohy_A_zadanie.ipynb
+10_prakticke_ulohy_B_zadanie.ipynb
+10_prakticke_ulohy_zadanie.ipynb

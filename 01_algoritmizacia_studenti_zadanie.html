@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>01 | Algoritmizácia a Python — zadania pre žiakov</title>
+  <title>01 | Algoritmizácia — zadania pre žiakov</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f8fafc; color: #1e293b; font-size: 20px; line-height: 1.7; }
@@ -131,6 +131,23 @@
     .vlastnosti td code { background: #ddd6fe; color: #3730a3; }
     .ok  { color: #15803d; font-weight: bold; }
     .nok { color: #b91c1c; font-weight: bold; }
+
+    /* Simulácia */
+    .sim-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin: 1.5rem 0; }
+    .sim-karta { border: 2px solid #c7d2fe; border-radius: .75rem; overflow: hidden; background: white; }
+    .sim-hlavicka { background: #312e81; color: white; padding: .7rem 1.2rem; font-size: .85rem; }
+    .sim-hlavicka strong { font-size: 1.05rem; display: block; margin-bottom: .15rem; }
+    .sim-hlavicka .vstupy { color: #c7d2fe; font-size: .8rem; font-family: 'Cascadia Code','Fira Code',monospace; }
+    .sim-telo { padding: 1rem 1.2rem; }
+    .sim-krok { display: flex; align-items: flex-start; gap: .5rem; margin-bottom: .55rem; font-size: .87rem; }
+    .sim-krok .cis { background: #e0e7ff; color: #3730a3; font-weight: bold; font-size: .75rem; padding: .15rem .45rem; border-radius: .25rem; white-space: nowrap; margin-top: .15rem; flex-shrink: 0; }
+    .sim-krok .text { color: #374151; }
+    .sim-krok .res-ano { color: #15803d; font-weight: bold; }
+    .sim-krok .res-nie { color: #6b7280; }
+    .sim-vysledok { background: #f0fdf4; border: 1px solid #86efac; border-radius: .4rem; padding: .6rem 1rem; text-align: center; margin-top: .75rem; font-weight: bold; color: #15803d; font-size: .95rem; }
+    .sim-cesta { display: inline-block; background: #dbeafe; color: #1e40af; font-size: .72rem; padding: .1rem .5rem; border-radius: .25rem; margin-left: .4rem; font-weight: normal; }
+    .sim-pozn { background: #eff6ff; border-left: 4px solid #3b82f6; padding: .85rem 1.25rem; border-radius: 0 .5rem .5rem 0; margin-top: 1.25rem; font-size: .9rem; }
+    .sim-pozn strong { color: #1e40af; }
   </style>
 </head>
 <body>
@@ -140,20 +157,18 @@
   <a href="#hodina1">1. hodina</a>
   <a href="#chyby">Nájdi chybu</a>
   <a href="#pisanie">Napíš algoritmus</a>
-  <a href="#hodina2">2. hodina – Python</a>
-  <a href="#projekt">Mini-projekt</a>
-  <a href="#bonus">Bonus</a>
+  <a href="#simulacia">Simulácia</a>
+  <a href="#cvicenia">Cvičenia IF</a>
 </nav>
 
 <!-- ÚVOD -->
 <section id="uvod">
   <div class="badge">PAI · Dvojhodinovka 01 · SPŠ IT Tvrdošín</div>
-  <h1>Algoritmizácia a Python</h1>
-  <p>Dnes sa pozrieme na to, čo musí (a čo nesmie) robiť algoritmus — a napíšeme prvé programy v Pythone.</p>
+  <h1>Algoritmizácia</h1>
+  <p>Dnes sa pozrieme na to, čo musí (a čo nesmie) robiť algoritmus — a precvičíme zápis algoritmov pseudokódom aj vývojovým diagramom.</p>
   <div class="info">
     📝 <strong>Kde píšeš?</strong><br>
-    V <strong>1. hodine</strong> zapisuješ do zošita — pseudokód alebo vývojový diagram.<br>
-    V <strong>2. hodine</strong> otvoriš Python editor (IDLE / Thonny / online) a píšeš kód.
+    Na tejto hodine zapisuješ do <strong>zošita</strong> — pseudokód alebo vývojový diagram.
   </div>
 </section>
 
@@ -297,6 +312,244 @@ Krok 2: Vypíš obsah</pre>
     <p>Napíš algoritmus, ktorý dostane tri čísla <code>x</code>, <code>y</code>, <code>z</code> a vypíše <strong>najväčšie</strong> z nich.</p>
     <p>Zamysli sa: stačia dve porovnania? Alebo potrebuješ viac?</p>
   </div>
+</section>
+
+<!-- SIMULÁCIA ALGORITMU MAXIMA -->
+<section id="simulacia">
+  <h2>Simulácia — Algoritmus maxima z troch čísel</h2>
+  <p>Pozri sa, ako algoritmus krok za krokom prechádza rôznymi vstupmi. Každá kombinácia otestuje <strong>inú cestu</strong> cez podmienky.</p>
+
+  <p>Algoritmus (presne ako sme ho mali na tabuli):</p>
+  <pre>1. načítaj(x)
+2. načítaj(y)
+3. načítaj(z)
+4. ak x ≥ y, tak max←x
+5. ak x &lt; y, tak max←y
+6. ak max &lt; z, tak max←z
+7. vypis(max)</pre>
+
+  <div class="sim-grid">
+
+    <!-- Kombinácia 1: x vyhráva -->
+    <div class="sim-karta">
+      <div class="sim-hlavicka">
+        <strong>Kombinácia 1</strong>
+        <div class="vstupy">x = 10 &nbsp;·&nbsp; y = 5 &nbsp;·&nbsp; z = 3</div>
+      </div>
+      <div class="sim-telo">
+        <div class="sim-krok">
+          <span class="cis">K4</span>
+          <span class="text">x ≥ y ? &nbsp; 10 ≥ 5 ? &nbsp; <span class="res-ano">ÁNO</span><br>→ max ← 10</span>
+        </div>
+        <div class="sim-krok">
+          <span class="cis">K5</span>
+          <span class="text">Krok 5 sa <span class="res-nie">preskočí</span> (podmienka K4 platila)</span>
+        </div>
+        <div class="sim-krok">
+          <span class="cis">K6</span>
+          <span class="text">max &lt; z ? &nbsp; 10 &lt; 3 ? &nbsp; <span class="res-nie">NIE</span><br>→ max zostáva 10</span>
+        </div>
+        <div class="sim-vysledok">Maximum = 10 &nbsp; <span class="sim-cesta">x vyhráva</span></div>
+      </div>
+    </div>
+
+    <!-- Kombinácia 2: y vyhráva -->
+    <div class="sim-karta">
+      <div class="sim-hlavicka">
+        <strong>Kombinácia 2</strong>
+        <div class="vstupy">x = 3 &nbsp;·&nbsp; y = 10 &nbsp;·&nbsp; z = 5</div>
+      </div>
+      <div class="sim-telo">
+        <div class="sim-krok">
+          <span class="cis">K4</span>
+          <span class="text">x ≥ y ? &nbsp; 3 ≥ 10 ? &nbsp; <span class="res-nie">NIE</span><br>→ Krok 4 sa preskočí</span>
+        </div>
+        <div class="sim-krok">
+          <span class="cis">K5</span>
+          <span class="text">x &lt; y ? &nbsp; 3 &lt; 10 ? &nbsp; <span class="res-ano">ÁNO</span><br>→ max ← 10</span>
+        </div>
+        <div class="sim-krok">
+          <span class="cis">K6</span>
+          <span class="text">max &lt; z ? &nbsp; 10 &lt; 5 ? &nbsp; <span class="res-nie">NIE</span><br>→ max zostáva 10</span>
+        </div>
+        <div class="sim-vysledok">Maximum = 10 &nbsp; <span class="sim-cesta">y vyhráva</span></div>
+      </div>
+    </div>
+
+    <!-- Kombinácia 3: z vyhráva — vstup z tabule! -->
+    <div class="sim-karta">
+      <div class="sim-hlavicka">
+        <strong>Kombinácia 3 ★</strong>
+        <div class="vstupy">x = 67 &nbsp;·&nbsp; y = 69 &nbsp;·&nbsp; z = 1000</div>
+      </div>
+      <div class="sim-telo">
+        <div class="sim-krok">
+          <span class="cis">K4</span>
+          <span class="text">x ≥ y ? &nbsp; 67 ≥ 69 ? &nbsp; <span class="res-nie">NIE</span><br>→ Krok 4 sa preskočí</span>
+        </div>
+        <div class="sim-krok">
+          <span class="cis">K5</span>
+          <span class="text">x &lt; y ? &nbsp; 67 &lt; 69 ? &nbsp; <span class="res-ano">ÁNO</span><br>→ max ← 69</span>
+        </div>
+        <div class="sim-krok">
+          <span class="cis">K6</span>
+          <span class="text">max &lt; z ? &nbsp; 69 &lt; 1000 ? &nbsp; <span class="res-ano">ÁNO</span><br>→ max ← 1000</span>
+        </div>
+        <div class="sim-vysledok">Maximum = 1000 &nbsp; <span class="sim-cesta">z vyhráva</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sim-pozn">
+    <strong>💡 Všimni si:</strong> Algoritmus má <strong>2 rozhodnutia</strong> → 4 možné cesty. Tri kombinácie vyššie pokryli tri z nich (x vyhráva, y vyhráva, z vyhráva cez K5). Existuje ešte štvrtá cesta: <em>x ≥ y (K4 platí), ale z je väčšie ako x (K6 platí)</em>. Vyskúšaj napr. <strong>x = 5, y = 3, z = 10</strong> — ktorý výsledok dostaneš?
+  </div>
+</section>
+
+<!-- CVIČNÁ SADA — IF -->
+<section id="cvicenia">
+  <h2>Cvičná sada — vstup / podmienka / výstup</h2>
+  <p>Pre každú úlohu: <strong>(1)</strong> napíš pseudokód do zošita, <strong>(2)</strong> skrokuj ho ručne na vzorových vstupoch, <strong>(3)</strong> napíš program v Python / VS Code.</p>
+  <div class="info">🛠️ Každá úloha používa iba: <code>input()</code> · <code>int()</code> / <code>float()</code> · <code>if / elif / else</code> · <code>print()</code></div>
+
+  <hr class="oddelovac">
+
+  <!-- C1 -->
+  <div class="uloha">
+    <h2>C1 — Väčšie z dvoch čísel</h2>
+    <p>Načítaj dve celé čísla <code>a</code> a <code>b</code>. Vypíš, ktoré je väčšie (alebo že sú rovnaké).</p>
+    <pre>Zadaj a: <span class="st">7</span>
+Zadaj b: <span class="st">12</span>
+Väčšie číslo je: 12</pre>
+    <pre>Zadaj a: <span class="st">5</span>
+Zadaj b: <span class="st">5</span>
+Čísla sú rovnaké.</pre>
+    <div class="zosit">
+      <div class="hint">📝 Pseudokód (skrokuj pre vstup a=7, b=12 a pre a=5, b=5)</div>
+      <ol>
+        <li style="color:#94a3b8">Krok 1: ...</li>
+        <li style="color:#94a3b8">Krok 2: ...</li>
+        <li style="color:#94a3b8">...</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- C2 -->
+  <div class="uloha">
+    <h2>C2 — Znamienko čísla</h2>
+    <p>Načítaj celé číslo <code>n</code>. Vypíš, či je <strong>kladné</strong>, <strong>záporné</strong> alebo <strong>nula</strong>.</p>
+    <pre>Zadaj číslo: <span class="st">-4</span>
+Číslo je záporné.</pre>
+    <pre>Zadaj číslo: <span class="st">0</span>
+Číslo je nula.</pre>
+    <div class="zosit">
+      <div class="hint">📝 Pseudokód (skrokuj pre n=−4, n=0, n=8)</div>
+      <ol>
+        <li style="color:#94a3b8">Krok 1: ...</li>
+        <li style="color:#94a3b8">...</li>
+      </ol>
+    </div>
+    <p class="hint" style="font-size:.87rem;color:#64748b;margin-top:.5rem">💡 Koľko vetiev <code>if/elif/else</code> potrebuješ?</p>
+  </div>
+
+  <!-- C3 -->
+  <div class="uloha">
+    <h2>C3 — Klasifikácia teploty</h2>
+    <p>Načítaj teplotu <code>t</code> (desatinné číslo, °C). Vypíš kategóriu podľa tabuľky:</p>
+    <table class="vlastnosti" style="margin:.6rem 0 1rem">
+      <tr><th>Teplota</th><th>Výpis</th></tr>
+      <tr><td><code>t &lt; 0</code></td><td>Mráz — oblečte sa!</td></tr>
+      <tr><td><code>0 ≤ t &lt; 15</code></td><td>Chladno.</td></tr>
+      <tr><td><code>15 ≤ t &lt; 30</code></td><td>Príjemné počasie.</td></tr>
+      <tr><td><code>t ≥ 30</code></td><td>Horúčava — pite vodu!</td></tr>
+    </table>
+    <pre>Teplota (°C): <span class="st">-5</span>
+Mráz — oblečte sa!</pre>
+    <pre>Teplota (°C): <span class="st">22</span>
+Príjemné počasie.</pre>
+    <div class="zosit">
+      <div class="hint">📝 Pseudokód (skrokuj pre t=−5, t=22, t=35)</div>
+      <ol>
+        <li style="color:#94a3b8">Krok 1: ...</li>
+        <li style="color:#94a3b8">...</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- C4 -->
+  <div class="uloha">
+    <h2>C4 — Vstupné podľa veku</h2>
+    <p>Načítaj vek návštevníka <code>v</code> (celé číslo). Vypíš cenu vstupného:</p>
+    <table class="vlastnosti" style="margin:.6rem 0 1rem">
+      <tr><th>Vek</th><th>Kategória</th><th>Cena</th></tr>
+      <tr><td><code>v &lt; 6</code></td><td>Dieťa do 5 rokov</td><td>0 € (zadarmo)</td></tr>
+      <tr><td><code>6 ≤ v ≤ 14</code></td><td>Dieťa</td><td>2 €</td></tr>
+      <tr><td><code>15 ≤ v ≤ 64</code></td><td>Dospelý</td><td>5 €</td></tr>
+      <tr><td><code>v ≥ 65</code></td><td>Senior</td><td>2 €</td></tr>
+    </table>
+    <pre>Vek: <span class="st">4</span>
+Vstupné zadarmo.</pre>
+    <pre>Vek: <span class="st">30</span>
+Vstupné: 5 €</pre>
+    <pre>Vek: <span class="st">70</span>
+Senior — vstupné: 2 €</pre>
+    <div class="zosit">
+      <div class="hint">📝 Pseudokód (skrokuj pre v=4, v=30, v=70)</div>
+      <ol>
+        <li style="color:#94a3b8">Krok 1: ...</li>
+        <li style="color:#94a3b8">...</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- C5 -->
+  <div class="uloha">
+    <h2>C5 — Výsledok zápasu</h2>
+    <p>Načítaj počet gólov domáceho tímu <code>d</code> a hosťovského tímu <code>h</code>. Vypíš výsledok z pohľadu domácich.</p>
+    <pre>Góly domácich: <span class="st">3</span>
+Góly hostí: <span class="st">1</span>
+Domáci vyhrali!</pre>
+    <pre>Góly domácich: <span class="st">2</span>
+Góly hostí: <span class="st">2</span>
+Remíza.</pre>
+    <pre>Góly domácich: <span class="st">0</span>
+Góly hostí: <span class="st">2</span>
+Domáci prehrali.</pre>
+    <div class="zosit">
+      <div class="hint">📝 Pseudokód (skrokuj všetky tri prípady)</div>
+      <ol>
+        <li style="color:#94a3b8">Krok 1: ...</li>
+        <li style="color:#94a3b8">...</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- C6 — ťažší -->
+  <div class="uloha">
+    <h2>C6 — Školská známka ⭐ (ťažší)</h2>
+    <p>Načítaj percentuálny výsledok testu <code>p</code> (0–100). Vypíš zodpovedajúcu známku:</p>
+    <table class="vlastnosti" style="margin:.6rem 0 1rem">
+      <tr><th>Percento</th><th>Známka</th></tr>
+      <tr><td><code>90 – 100</code></td><td>1 (výborný)</td></tr>
+      <tr><td><code>75 – 89</code></td><td>2 (chválitebný)</td></tr>
+      <tr><td><code>60 – 74</code></td><td>3 (dobrý)</td></tr>
+      <tr><td><code>45 – 59</code></td><td>4 (dostatočný)</td></tr>
+      <tr><td><code>0 – 44</code></td><td>5 (nedostatočný)</td></tr>
+    </table>
+    <pre>Výsledok (%): <span class="st">82</span>
+Známka: 2 (chválitebný)</pre>
+    <pre>Výsledok (%): <span class="st">44</span>
+Známka: 5 (nedostatočný)</pre>
+    <div class="zosit">
+      <div class="hint">📝 Pseudokód (skrokuj pre p=82, p=44, p=100)</div>
+      <ol>
+        <li style="color:#94a3b8">Krok 1: ...</li>
+        <li style="color:#94a3b8">...</li>
+      </ol>
+    </div>
+    <p class="hint" style="font-size:.87rem;color:#64748b;margin-top:.5rem">💡 Hint: začni od najvyššieho skóre — <code>if p &gt;= 90</code> — a pokračuj nadol cez <code>elif</code>.</p>
+  </div>
+
 </section>
 
 <!-- === 2. HODINA === -->
